@@ -6,13 +6,13 @@ This is an implementation of  [Noise Contrastive Estimation (NCE)]( http://proce
 
 NCE is a method to estimate energy based models (EBM)
 
-$$p(x) = \frac{\exp[-f_\theta(x)]}{Z(\theta)}$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=p(x)&space;=&space;\frac{\exp[-f_\theta(x)]}{Z(\theta)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p(x)&space;=&space;\frac{\exp[-f_\theta(x)]}{Z(\theta)}" title="p(x) = \frac{\exp[-f_\theta(x)]}{Z(\theta)}" /></a>
 
 where
 
-$$Z(\theta) = \int\exp[-f_\theta(x)]dx$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=Z(\theta)&space;=&space;\int\exp[-f_\theta(x)]dx" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Z(\theta)&space;=&space;\int\exp[-f_\theta(x)]dx" title="Z(\theta) = \int\exp[-f_\theta(x)]dx" /></a>
 
-is the normalizing constant that is hard to compute. In NCE,  the normalizing constant is specified as a trainable parameter $c=\log Z$. We cannot directly do MLE training on the dataset because $p$ can simply blow up to infinity by letting $Z\to0$ (or $c\to-\infty$). Instead, in NCE, we train the EBM by doing a (nonlinear) logistic regression/classification between the training data and some noise. 
+is the normalizing constant that is hard to compute. In NCE,  the normalizing constant is specified as a trainable parameter <a href="https://www.codecogs.com/eqnedit.php?latex=c=\log&space;Z" target="_blank"><img src="https://latex.codecogs.com/gif.latex?c=\log&space;Z" title="c=\log Z" /></a>. We cannot directly do MLE training on the dataset because $p$ can simply blow up to infinity by letting  <a href="https://www.codecogs.com/eqnedit.php?latex=Z\to0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Z\to0" title="Z\to0" /></a>(or <a href="https://www.codecogs.com/eqnedit.php?latex=c\to-\infty" target="_blank"><img src="https://latex.codecogs.com/gif.latex?c\to-\infty" title="c\to-\infty" /></a>). Instead, in NCE, we train the EBM by doing a (nonlinear) logistic regression/classification between the training data and some noise. 
 
 ----
 
