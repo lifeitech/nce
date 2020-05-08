@@ -25,7 +25,6 @@ def value(energy, noise, x, gen):
 
     acc = ((r_x > 1/2).sum() + (r_gen > 1/2).sum()).cpu().numpy() / (len(x) + len(gen))
 
-
     return -v,  acc
 
 
@@ -36,7 +35,6 @@ def get_data(args):
     dataset = sample_2d_data(dataset=args.dataset, n_samples=args.samples)
     dataloader  = DataLoader(dataset, batch_size=args.batch, shuffle=True)
     return dataset, dataloader
-    
 
 def sample_2d_data(dataset='8gaussians', n_samples=50000):
     
@@ -142,19 +140,16 @@ def plot(dataset, energy, noise, epoch, device):
     plt.savefig('images/epoch_{}.png'.format(epoch))
     plt.close()
 
-
 def setup_grid(range_lim, n_pts, device):
     x = torch.linspace(-range_lim, range_lim, n_pts)
     xx, yy = torch.meshgrid((x, x))
     zz = torch.stack((xx.flatten(), yy.flatten()), dim=1)
     return xx, yy, zz.to(device)
 
-
 def plot_samples(dataset, ax, range_lim, n_pts):
     samples = dataset.numpy()
     ax.hist2d(samples[:,0], samples[:,1], range=[[-range_lim, range_lim], [-range_lim, range_lim]], bins=n_pts, cmap=plt.cm.jet)
     ax.set_title('Target samples')
-
 
 def plot_energy(energy, ax, test_grid, n_pts):
     xx, yy, zz = test_grid

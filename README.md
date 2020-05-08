@@ -2,7 +2,7 @@
 
 ### The Method
 
-This is an implementation of  [Noise Contrastive Estimation (NCE)]( http://proceedings.mlr.press/v9/gutmann10a/gutmann10a.pdf ) on 2D dataset. 
+This is an implementation of  [Noise Contrastive Estimation (NCE)]( http://proceedings.mlr.press/v9/gutmann10a/gutmann10a.pdf ) in PyTorch on 2D dataset. 
 
 NCE is a method to estimate energy based models (EBM)
 
@@ -21,7 +21,7 @@ is the normalizing constant that is hard to compute. In NCE,  the normalizing co
 The training objective is specified in the file [util.py](util.py). To train the model, do
 
 ```shell
-python trian.py --dataset=8gaussians # avaiable: '8gaussians', '2spirals', 'checkerboard', 'rings', 'pinwheel'
+python trian.py --dataset=8gaussians  # avaiable: '8gaussians', '2spirals', 'checkerboard', 'rings', 'pinwheel'
 ```
 
 ----

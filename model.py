@@ -1,7 +1,5 @@
-import numpy as np
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
 
 # ------------------------------
 # ENERGY-BASED MODEL
@@ -21,5 +19,5 @@ class EBM(nn.Module):
             )
 
     def forward(self, x):
-        log_prob = - self.f(x) - self.c
-        return log_prob
+        log_p = - self.f(x) - self.c
+        return log_p
