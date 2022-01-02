@@ -24,7 +24,7 @@ Here we use Multivariate Gaussian as the noise distribution.
 
 The objective is to _maximize_ the posterior log-likelihood of the classification
 
-<img src="https://latex.codecogs.com/svg.image?V(\theta)&space;=&space;\mathbb{E}_{x\sim&space;p_{\text{data}}}\log\frac{p_\theta(x)}{p_\theta(x)&plus;q(x)}&space;&plus;&space;\mathbb{E}_{\tilde{x}\sim&space;q}\log\frac{q(x)}{p_\theta(\tilde{x})&space;&plus;&space;q(\tilde{x})}." title="V(\theta) = \mathbb{E}_{x\sim p_{\text{data}}}\log\frac{p_\theta(x)}{p_\theta(x)+q(x)} + \mathbb{E}_{\tilde{x}\sim q}\log\frac{q(x)}{p_\theta(\tilde{x}) + q(\tilde{x})}." />
+<img src="https://latex.codecogs.com/svg.image?V(\theta)&space;=&space;\mathbb{E}_{x\sim&space;p_{\text{data}}}\log\frac{p_\theta(x)}{p_\theta(x)&plus;q(x)}&space;&plus;&space;\mathbb{E}_{\tilde{x}\sim&space;q}\log\frac{q(\tilde{x})}{p_\theta(\tilde{x})&space;&plus;&space;q(\tilde{x})}." title="V(\theta) = \mathbb{E}_{x\sim p_{\text{data}}}\log\frac{p_\theta(x)}{p_\theta(x)+q(x)} + \mathbb{E}_{\tilde{x}\sim q}\log\frac{q(\tilde{x})}{p_\theta(\tilde{x}) + q(\tilde{x})}." />
 
 This objective is implemented in the file [util.py](util.py) as the `value` function. In other word, we minimize <img src="https://latex.codecogs.com/svg.image?\inline&space;-V(\theta)" title="\inline -V(\theta)" />, and we use Adam as the optimizer.
 
