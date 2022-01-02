@@ -12,13 +12,13 @@ where
 
 <img src="https://latex.codecogs.com/svg.image?Z(\theta)&space;=&space;\int\exp[-f_\theta(x)]dx" title="Z(\theta) = \int\exp[-f_\theta(x)]dx" />
 
-is the normalizing constant that is hard to compute. In NCE,  the normalizing constant is treated as a trainable parameter <img src="https://latex.codecogs.com/svg.image?c=\log&space;Z" title="c=\log Z" />. We cannot directly do maximum likelihood estimation (MLE) with <img src="https://latex.codecogs.com/svg.image?\inline&space;\max_\theta&space;p_\theta(x)" title="\inline \max_\theta p_\theta(x)" /> because <img src="https://latex.codecogs.com/svg.image?\inline&space;p_\theta(x)" title="\inline p_\theta(x)" /> can simply blow up to infinity by letting  <img src="https://latex.codecogs.com/svg.image?Z\to0" title="Z\to0" />(or <img src="https://latex.codecogs.com/svg.image?c\to&space;-\infty" title="c\to -\infty" />). Instead, in Noise Contrastive Estimation, we train the energy based model by doing (nonlinear) logistic regression/classification between the data distribution <img src="https://latex.codecogs.com/svg.image?p_{\mathrm{data}}" title="p_{\mathrm{data}}" /> and some noise distribution <img src="https://latex.codecogs.com/svg.image?q" title="q" />. 
+is the normalizing constant that is hard to compute. In NCE,  the normalizing constant is treated as a trainable parameter <img src="https://latex.codecogs.com/svg.image?c=\log&space;Z" title="c=\log Z" />. We cannot directly do maximum likelihood estimation (MLE) with <img src="https://latex.codecogs.com/svg.image?\inline&space;\max_\theta&space;p_\theta(x)" title="\inline \max_\theta p_\theta(x)" /> because <img src="https://latex.codecogs.com/svg.image?\inline&space;p_\theta(x)" title="\inline p_\theta(x)" /> can simply blow up to infinity by letting  <img src="https://latex.codecogs.com/svg.image?Z\to0" title="Z\to0" /> (or <img src="https://latex.codecogs.com/svg.image?c\to&space;-\infty" title="c\to -\infty" />). Instead, in Noise Contrastive Estimation, we train the energy based model by doing (nonlinear) logistic regression/classification between the data distribution <img src="https://latex.codecogs.com/svg.image?p_{\mathrm{data}}" title="p_{\mathrm{data}}" /> and some noise distribution <img src="https://latex.codecogs.com/svg.image?q" title="q" />. 
 
 There are three requirements for the noise distribution <img src="https://latex.codecogs.com/svg.image?q" title="q" />:
 
 1. log density can be evaluated on any input;
 2. samples can be obtained from the distribution;
-3. <img src="https://latex.codecogs.com/svg.image?q(x)\neq0" title="q(x)\neq0" /> for all <img src="https://latex.codecogs.com/svg.image?x" title="x" /> such that<img src="https://latex.codecogs.com/svg.image?p_{\mathrm{data}}(x)\neq0" title="p_{\mathrm{data}}(x)\neq0" />.
+3. <img src="https://latex.codecogs.com/svg.image?q(x)\neq0" title="q(x)\neq0" /> for all <img src="https://latex.codecogs.com/svg.image?x" title="x" /> such that <img src="https://latex.codecogs.com/svg.image?p_{\mathrm{data}}(x)\neq0" title="p_{\mathrm{data}}(x)\neq0" />.
 
 Here we use Multivariate Gaussian as the noise distribution. 
 
