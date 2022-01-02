@@ -10,15 +10,15 @@ import matplotlib.pyplot as plt
 
 
 def value(energy, noise, x, gen):
-    logp_x = energy(x)
-    logq_x = noise.log_prob(x).unsqueeze(1)
-    logp_gen = energy(gen)
-    logq_gen = noise.log_prob(gen).unsqueeze(1)
+    logp_x = energy(x)  # logp(x)
+    logq_x = noise.log_prob(x).unsqueeze(1)  # logq(x)
+    logp_gen = energy(gen)  # logp(x̃)
+    logq_gen = noise.log_prob(gen).unsqueeze(1)  # logq(x̃)
 
-    ll_data = logp_x - torch.logsumexp(torch.cat([logp_x, logq_x], dim=1), dim=1, keepdim=True)
-    ll_gen = logq_gen - torch.logsumexp(torch.cat([logp_gen, logq_gen], dim=1), dim=1, keepdim=True)
+    value_data = logp_x - torch.logsumexp(torch.cat([logp_x, logq_x], dim=1), dim=1, keepdim=True)  # logp(x)/(logp(x) + logq(x))
+    value_gen = logq_gen - torch.logsumexp(torch.cat([logp_gen, logq_gen], dim=1), dim=1, keepdim=True)  # logq(x̃)/(logp(x̃) + logq(x̃))
 
-    v = ll_data.mean() + ll_gen.mean()
+    v = value_data.mean() + value_gen.mean()
 
     r_x = torch.sigmoid(logp_x - logq_x)
     r_gen = torch.sigmoid(logq_gen - logp_gen)
