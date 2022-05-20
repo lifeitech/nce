@@ -16,11 +16,11 @@ is the normalizing constant that is hard to compute. In NCE,  the normalizing co
 
 There are three requirements for the noise distribution $q$:
 
-(1) log density can be evaluated on any input;
+&nbsp;&nbsp;(1) log density can be evaluated on any input;
 
-(2) samples can be obtained from the distribution;
+&nbsp;&nbsp;(2) samples can be obtained from the distribution;
 
-(3) $q(x)\neq0$ for all $x$ such that $p\_{\mathrm{data}}(x)\neq0$.
+&nbsp;&nbsp;(3) $q(x)\neq0$ for all $x$ such that $p\_{\mathrm{data}}(x)\neq0$.
 
 Here we use Multivariate Gaussian as the noise distribution. 
 
