@@ -16,17 +16,17 @@ is the normalizing constant that is hard to compute. In NCE,  the normalizing co
 
 There are three requirements for the noise distribution $q$:
 
-1. log density can be evaluated on any input;
-2. samples can be obtained from the distribution;
-3. $q(x)\neq0$ for all $x$ such that $p_{\mathrm{data}}(x)\neq0$.
+1/ log density can be evaluated on any input;
+2/ samples can be obtained from the distribution;
+3/ $q(x)\neq0$ for all $x$ such that $p_{\mathrm{data}}(x)\neq0$.
 
 Here we use Multivariate Gaussian as the noise distribution. 
 
 The objective is to _maximize_ the posterior log-likelihood of the classification
 
-$$V(\theta) = \mathbb{E}_{x\sim p_{\text{data}}}\log\frac{p_\theta(x)}{p_\theta(x)+q(x)} + \mathbb{E}_{\tilde{x}\sim q}\log\frac{q(\tilde{x})}{p_\theta(\tilde{x}) + q(\tilde{x})}.$$
+$V(\theta) = \mathbb{E}_{x\sim p_{\text{data}}}\log\frac{p_\theta(x)}{p_\theta(x)+q(x)} + \mathbb{E}_{\tilde{x}\sim q}\log\frac{q(\tilde{x})}{p_\theta(\tilde{x}) + q(\tilde{x})}.$
 
-This objective is implemented in the file [util.py](util.py) as the `value` function. In other word, we minimize $-V(\theta)$, and we use Adam as the optimizer.
+This objective is implemented in the file [util.py](util.py) as the `value` function. We use Adam as the optimizer.
 
 ### Training
 
