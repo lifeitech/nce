@@ -6,11 +6,11 @@ This is an implementation of  [Noise Contrastive Estimation (NCE)]( http://proce
 
 NCE is a method to estimate energy based models (EBM)
 
-<img src="https://latex.codecogs.com/svg.image?p_\theta(x)&space;=&space;\frac{\exp[-f_\theta(x)]}{Z(\theta)}" title="p_\theta(x) = \frac{\exp[-f_\theta(x)]}{Z(\theta)}" />
+$$p_\theta(x) = \frac{\exp[-f_\theta(x)]}{Z(\theta)}$$
 
 where
 
-<img src="https://latex.codecogs.com/svg.image?Z(\theta)&space;=&space;\int\exp[-f_\theta(x)]dx" title="Z(\theta) = \int\exp[-f_\theta(x)]dx" />
+$$Z(\theta) = \int\exp[-f_\theta(x)]dx$$
 
 is the normalizing constant that is hard to compute. In NCE,  the normalizing constant is treated as a trainable parameter <img src="https://latex.codecogs.com/svg.image?c=\log&space;Z" title="c=\log Z" />. We cannot directly do maximum likelihood estimation (MLE) with <img src="https://latex.codecogs.com/svg.image?\inline&space;\max_\theta&space;p_\theta(x)" title="\inline \max_\theta p_\theta(x)" /> because <img src="https://latex.codecogs.com/svg.image?\inline&space;p_\theta(x)" title="\inline p_\theta(x)" /> can simply blow up to infinity by letting  <img src="https://latex.codecogs.com/svg.image?Z\to0" title="Z\to0" /> (or <img src="https://latex.codecogs.com/svg.image?c\to&space;-\infty" title="c\to -\infty" />). Instead, in Noise Contrastive Estimation, we train the energy based model by doing (nonlinear) logistic regression/classification between the data distribution <img src="https://latex.codecogs.com/svg.image?p_{\mathrm{data}}" title="p_{\mathrm{data}}" /> and some noise distribution <img src="https://latex.codecogs.com/svg.image?q" title="q" />. 
 
@@ -42,7 +42,7 @@ Available datasets:
 -  `rings`
 -   `pinwheel`
 
-A density plot is saved in the folder `images` after every epoch. After training, you can obtain gif images like below by excecuting the python script in the folder:
+A density plot is saved in the folder `images` after every epoch. After training, you can obtain gif images like below by executing the python script in the folder:
 
 ```shell
 cd images
