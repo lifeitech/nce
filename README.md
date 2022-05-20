@@ -12,13 +12,15 @@ where
 
 $$Z(\theta) = \int\exp[-f_\theta(x)]dx$$
 
-is the normalizing constant that is hard to compute. In NCE,  the normalizing constant is treated as a trainable parameter $c=\log Z$. We cannot directly do maximum likelihood estimation (MLE) with $\max_\theta p_\theta(x)$ because $p_\theta(x)$ can simply blow up to infinity by letting  $Z\to0$ (or $c\to -\infty$). Instead, in Noise Contrastive Estimation, we train the energy based model by doing (nonlinear) logistic regression/classification between the data distribution $p_{\mathrm{data}}$ and some noise distribution $q$. 
+is the normalizing constant that is hard to compute. In NCE,  the normalizing constant is treated as a trainable parameter $c=\log Z$. We cannot directly do maximum likelihood estimation (MLE) with $\displaystyle\max_\theta p_\theta(x)$ because $p_\theta(x)$ can simply blow up to infinity by letting  $Z\to0$ (or $c\to -\infty$). Instead, in Noise Contrastive Estimation, we train the energy based model by doing (nonlinear) logistic regression/classification between the data distribution $p_{\mathrm{data}}$ and some noise distribution $q$. 
 
 There are three requirements for the noise distribution $q$:
 
-1. log density can be evaluated on any input;
-2. samples can be obtained from the distribution;
-3. $q(x)\neq0$ for all $x$ such that $p\_{\mathrm{data}}(x)\neq0$.
+(1) log density can be evaluated on any input;
+
+(2) samples can be obtained from the distribution;
+
+(3) $q(x)\neq0$ for all $x$ such that $p\_{\mathrm{data}}(x)\neq0$.
 
 Here we use Multivariate Gaussian as the noise distribution. 
 
@@ -26,7 +28,7 @@ The objective is to _maximize_ the posterior log-likelihood of the classificatio
 
 $$V(\theta) = \mathbb{E}\_{x\sim p\_{\text{data}}}\log\frac{p\_\theta(x)}{p\_\theta(x)+q(x)} + \mathbb{E}\_{\tilde{x}\sim q}\log\frac{q(\tilde{x})}{p\_\theta(\tilde{x}) + q(\tilde{x})}.$$
 
-This objective is implemented in the file [util.py](util.py) as the `value` function. We use Adam as the optimizer.
+This objective is implemented in the file [util.py](util.py) as the `value` function (we minimize $-V(\theta)$). We use Adam as the optimizer.
 
 ### Training
 
