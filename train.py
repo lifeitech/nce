@@ -8,10 +8,15 @@ import torch.distributions as D
 from model import EBM
 import util
 
-device = torch.device('cuda')
+d = 'cpu'
+if torch.cuda.is_available():
+    d = 'cuda'
+elif torch.backends.mps.is_available():
+    d = 'mps'
+device = torch.device(d)
 
 parser = argparse.ArgumentParser(description='Noise Contrastive Estimation')
-parser.add_argument('--epoch', default=100, type=int, help='number of training epochs')
+parser.add_argument('--epoch', default=50, type=int, help='number of training epochs')
 parser.add_argument('--batch', default=100, type=int, help='batch size')
 parser.add_argument('--dataset', default='8gaussians', type=str, choices=['8gaussians', '2spirals', 'checkerboard', 'rings', 'pinwheel'], help='2D dataset to use') 
 parser.add_argument('--samples', default=10000, type=int, help='number of 2D samples for training')
@@ -67,7 +72,6 @@ def main(args):
                 "[Epoch %d/%d] [Batch %d/%d] [Value: %f] [Accuracy:%f]"
                 % (epoch, start_epoch + args.epoch, i, len(dataloader), loss_energy.item(), acc)
             )
-
 
         # Save checkpoint
         print('Saving models...')

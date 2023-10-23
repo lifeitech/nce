@@ -30,19 +30,43 @@ $$V(\theta) = \mathbb{E}\_{x\sim p\_{\text{data}}}\log\frac{p\_\theta(x)}{p\_\th
 
 This objective is implemented in the file [util.py](util.py) as the `value` function (we minimize $-V(\theta)$). We use Adam as the optimizer.
 
+### Installation
+
+Clone the repository to your local machine with
+
+```shell
+git clone https://github.com/lifeitech/nce.git
+```
+
+In your python environment, `cd` to the repository, and 
+
+```shell
+pip install -r requirements.txt
+```
+
 ### Training
 
 To train the model, do
 
 ```shell
-python trian.py --dataset=8gaussians 
+python trian.py
 ```
+
+For MacOS users, since currently PyTorch only has limited support for `mps`, make sure to run the script with `PYTORCH_ENABLE_MPS_FALLBACK=1`. You can add
+
+```shell
+export PYTORCH_ENABLE_MPS_FALLBACK=1 
+```
+
+to your `.zshrc` file.
+
 Available datasets:
+
 - `8gaussians` (default)
 - `2spirals`
--  `checkerboard`
--  `rings`
--   `pinwheel`
+- `checkerboard`
+- `rings`
+- `pinwheel`
 
 A density plot is saved in the folder `images` after every epoch. After training, you can obtain gif images like below by executing the python script in the folder:
 

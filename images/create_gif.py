@@ -3,7 +3,7 @@ import glob
 import imageio
 
 filenames = glob.glob('*.png')
-filenames.sort(key=lambda x: int(x[6:-4]))  # e p o c h _ [XXX] .p n g
+filenames.sort(key=lambda x: int(x[6:-4]))  # epoch_[XXX].png
 
 images = [imageio.imread(filename) for filename in filenames]
 

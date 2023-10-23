@@ -15,8 +15,8 @@ def value(energy, noise, x, gen):
     logp_gen = energy(gen)  # logp(x̃)
     logq_gen = noise.log_prob(gen).unsqueeze(1)  # logq(x̃)
 
-    value_data = logp_x - torch.logsumexp(torch.cat([logp_x, logq_x], dim=1), dim=1, keepdim=True)  # logp(x)/(logp(x) + logq(x))
-    value_gen = logq_gen - torch.logsumexp(torch.cat([logp_gen, logq_gen], dim=1), dim=1, keepdim=True)  # logq(x̃)/(logp(x̃) + logq(x̃))
+    value_data = logp_x - torch.logsumexp(torch.cat([logp_x, logq_x], dim=1), dim=1, keepdim=True)  # log[p(x)/(p(x) + q(x))]
+    value_gen = logq_gen - torch.logsumexp(torch.cat([logp_gen, logq_gen], dim=1), dim=1, keepdim=True)  # log[q(x̃)/(p(x̃) + q(x̃))]
 
     v = value_data.mean() + value_gen.mean()
 
@@ -142,7 +142,7 @@ def plot(dataset, energy, noise, epoch, device):
 
 def setup_grid(range_lim, n_pts, device):
     x = torch.linspace(-range_lim, range_lim, n_pts)
-    xx, yy = torch.meshgrid((x, x))
+    xx, yy = torch.meshgrid((x, x), indexing='ij')
     zz = torch.stack((xx.flatten(), yy.flatten()), dim=1)
     return xx, yy, zz.to(device)
 
@@ -156,7 +156,7 @@ def plot_energy(energy, ax, test_grid, n_pts):
     log_prob = energy(zz)
     prob = log_prob.exp().cpu()
     # plot
-    ax.pcolormesh(xx, yy, prob.view(n_pts,n_pts), cmap=plt.cm.jet)
+    ax.pcolormesh(xx.numpy(), yy.numpy(), prob.view(n_pts,n_pts).numpy(), cmap=plt.cm.jet)
     ax.set_facecolor(plt.cm.jet(0.))
     ax.set_title('Energy density')
 
@@ -165,7 +165,7 @@ def plot_noise(noise, ax, test_grid, n_pts):
     log_prob = noise.log_prob(zz)
     prob = log_prob.exp().cpu()
     # plot
-    ax.pcolormesh(xx, yy, prob.view(n_pts,n_pts), cmap=plt.cm.jet)
+    ax.pcolormesh(xx.numpy(), yy.numpy(), prob.view(n_pts,n_pts).numpy(), cmap=plt.cm.jet)
     ax.set_facecolor(plt.cm.jet(0.))
     ax.set_title('Noise density')
 
